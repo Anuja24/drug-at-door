@@ -1,0 +1,24 @@
+<div class="nav">
+      <ul>
+        <li><a href="/superadmin/companies/new_company">Add New Company</a></li>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Company Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%@companies.each do |company|%>
+      <tr>
+        <td><%=company.company_name %></td>
+        <td><%=link_to "Edit",edit_compnay_name_superadmin_companies_path(id:company.id)%></td>
+        <td><%=link_to "Delete",delete_company_superadmin_companies_path(id:company.id),method: :delete,data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+    <%end%>
+    </tbody>
+  </table>
+</div>

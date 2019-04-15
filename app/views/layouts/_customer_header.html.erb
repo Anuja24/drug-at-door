@@ -1,0 +1,22 @@
+        <div class="span8">
+          <div class="account pull-right">
+            <ul class="user-menu">
+            <% unless current_user.nil?%>       
+              <li><a href="#">My Account</a>
+                <ul class="dropdown">
+                <li><a href="#"><%=current_user.first_name + ' ' + current_user.last_name%></a></li>
+                <li><a href="/customer/dashboards/orders_history">My Orders</a></li>
+                <li><a href="#">My Wishlist</a></li>
+                <li><%= link_to "Sign Out", destroy_user_session_path,:method => :delete %></li>
+                
+            </ul>
+              </li>
+              <li><a href="cart.html">Your Cart</a></li>
+            <% else %>
+              <li><a href="cart.html">Your Cart</a></li>
+              <li><a href="/users/sign_in">Login</a></li>         
+              <li><a href="/users/customer_sign_up">Sign Up</a></li>   
+            <%end%> 
+            </ul>
+          </div>
+        </div>

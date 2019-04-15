@@ -1,0 +1,25 @@
+<section class="main-content">        
+    <div class="row">
+      <div class="span7">         
+            <h4 class="title"><span class="text"><strong>Composition</strong> Form</span></h4>
+            <%= form_for(:composition, url: superadmin_compositions_path) do |f| %>
+              <fieldset>
+             
+                <div class="control-group">
+                  <%= f.label :Composition_name,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.text_field :Composition_name,:placeholder => "Name"%>
+                    </div>
+                </div>
+              
+
+                <div class="control-group">
+                  <div class="controls">
+                    <%= f.submit :"Save",:class => "btn btn-inverse large"%>
+                  </div>
+                </div>    
+              </fieldset>
+            <%end%>        
+      </div>        
+    </div>
+</section>

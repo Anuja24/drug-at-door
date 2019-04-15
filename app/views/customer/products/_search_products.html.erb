@@ -1,0 +1,10 @@
+<div class="tab-pane  active" id="blockView">
+		<ul class="thumbnails">
+		  <%@products.each do |product|%>
+			<li class="span3">
+			<%= render "product_row", product: product, order_item: @order_item %>
+			</li>
+		  <%end%>
+		</ul>
+	<hr class="soft"/>
+	</div>

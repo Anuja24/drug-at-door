@@ -1,0 +1,25 @@
+<div class="nav">
+      <ul>
+        <li><a href="/superadmin/compositions/new">Add New Composition</a></li>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Composition Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+  <%@compositions.each do |c|%>
+      <tr>
+        <td><%=c.Composition_name %></td>
+        <td><%=link_to "Edit",edit_superadmin_composition_path(id:c.id)%></td>
+        <td><%=link_to "Delete",superadmin_composition_path(id:c.id),method: :delete,data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+    <%end%>
+    </tbody>
+  </table>
+</div>

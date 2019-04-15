@@ -1,0 +1,35 @@
+<section class="main-content">        
+    <div class="row">
+      <div class="span7">         
+            <h4 class="title"><span class="text"><strong>Company</strong> Form</span></h4>
+            <%=form_for @company, :url => {:action=>'update_company_name',:id => @company.id }, method: :patch do |f| %>
+              <fieldset>
+                <div class="control-group">
+                  <%= f.label :section,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.grouped_collection_select :section_id, SectionType.order(:section_type_name), :sections, :section_type_name, :id, :section_name, {prompt:"Select Company"} %>
+                    </div>
+                </div>
+                <div class="control-group">
+                  <%= f.label :company_name,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.text_field :company_name,:placeholder => "Name"%>
+                    </div>
+                </div>
+                <div class="control-group">
+                  <%= f.label :company_description,:class=>"control-label"  %>
+                    <div class="controls">
+                      <%= f.text_field :company_description,:placeholder => "Description"%>
+                     </div>
+                </div>
+
+                <div class="control-group">
+                  <div class="controls">
+                    <%= f.submit :"Update Company",:class => "btn btn-inverse large"%>
+                  </div>
+                </div>    
+              </fieldset>
+            <%end%>        
+      </div>        
+    </div>
+</section>

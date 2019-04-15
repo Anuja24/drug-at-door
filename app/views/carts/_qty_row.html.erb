@@ -1,0 +1,9 @@
+ <%=form_for order_item,remote:true do |f| %>
+					<div class="input-append">
+                      <%= f.text_field :quantity,:value => order_item.quantity,:class => "span1",:style => "max-width:34px" ,:min => "1"%>
+					<button class="quantity-left-minus btn" type="submit"><i class="icon-minus"></i></button>
+                    <button class="quantity-right-plus btn" type="submit"><i class="icon-plus"></i></button>
+                   <%= link_to "Remove", order_item, { data: { confirm: "Are you sure you wish to delete the product '#{order_item.product.product_name}' from your cart?" }, method: :delete, remote: true, class: "btn btn-danger" } %>		
+					</div>
+					
+<%end%>

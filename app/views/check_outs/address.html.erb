@@ -1,0 +1,48 @@
+<section class="header_text sub">
+    <h4><span>Address</span></h4>
+      </section>
+  <section class="main-content"> 
+         <div class="row">
+         <div class="span7">
+         <h4 class="title"><span class="text"><strong>Select</strong>Address</span></h4>
+          <%= form_for(@address, url: {:action=>'pay'}, method: :get) do |f| %>
+         <%@addresses.each do |address|%>
+         <div class="radio">
+             <label>
+               <%= radio_button_tag "default_address",address.id%>Use This Address
+             </label>
+          </div>
+         
+          <div >
+              <label class="control-label"><%=address.full_address%></label>
+          </div>
+
+           <div class="control-group">
+                  <label class="control-label"><%=address.land_mark%></label>
+          </div>
+
+           <div class="control-group">
+                  <label class="control-label"><%=address.city%></label>
+          </div>
+           
+           <div class="control-group">
+                  <label class="control-label"><%=address.state%></label>
+          </div>
+
+
+          <div class="control-group">
+                  <label class="control-label"><%=address.pincode%></label>
+          </div>
+            
+           <hr>
+          <%end%>
+            <%= f.submit :"Next",:class => "btn btn-large btn-primary pull-right"%>
+            <%end%>
+          </div>
+          <div>
+             <div class="span5">
+               <h4 class="title"><span class="text"><strong>Add</strong>New Address</span></h4>
+                <div><%=link_to "Add New Address",new_check_out_path%></div></div>
+          </div>
+          </div>
+          </section>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootshop online Shopping cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+   <title>DrugAtDoor</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body>   
+    <div id="top-bar" class="container">
+      <div class="row">
+        <div class="span4">
+          <form method="POST" class="search_form">
+            <input type="text" class="input-block-level search-query" Placeholder="eg. T-sirt">
+          </form>
+        </div>
+        <div class="span8">
+          <div class="account pull-right">
+            <ul class="user-menu">
+            <% unless current_user.nil?%>       
+              <li><a href="#">My Account</a>
+                <ul class="dropdown">
+                <li><a href="#"><%=current_user.first_name + ' ' + current_user.last_name%></a></li>
+                <%if current_user.role == "Customer"%>
+                <li><a href="/customer/dashboards/orders_history">My Orders</a></li>
+                <li><a href="#">My Wishlist</a></li>
+                <%else%>
+                <li><a href="/superadmin/dashboards">Dashboard</a></li>
+                <%end%>
+                <li><%= link_to "Sign Out", destroy_user_session_path,:method => :delete %></li>
+                
+            </ul>
+              </li>
+              <%if current_user.role == "Customer"%>
+              <li class="my-cart"><%= render 'layouts/my_cart' %></li>
+              <%end%>
+            <% else %>
+              <li class="my-cart"><%= render 'layouts/my_cart' %></li>
+              <li><a href="/users/sign_in">Login</a></li>         
+              <li><a href="/users/customer_sign_up">Sign Up</a></li>   
+            <%end%> 
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="wrapper" class="container">
+      <section class="navbar main-menu">
+        <div class="navbar-inner main-menu">        
+          <a href="index.html" class="logo pull-left"><img src="/assets/logo.png" class="site_logo" alt=""></a>
+          <nav id="menu" class="pull-right">
+           <%if current_user.nil?%> 
+              <ul>
+              <%SectionType.all.each do |section_type|%>
+              <li><a href=""><%=section_type.section_type_name%></a>         
+               <%section = Section.where(section_type_id:section_type.id)%>
+                <ul>
+                  <%section.each do |section|%>
+                  <li><%=link_to section.section_name,product_section_customer_products_path(id:section.id)%></li>                 
+                  <%end%>               
+                </ul>
+              </li>  
+             <%end%>
+            </ul>
+          <%else%>
+            <%if current_user.role == "Customer"%>
+            <ul>
+              <%SectionType.all.each do |section_type|%>
+      <li><%=link_to section_type.section_type_name,product_section_type_customer_products_path(id:section_type.id)%>        
+               <%section = Section.where(section_type_id:section_type.id)%>
+                <ul>
+                  <%section.each do |section|%>
+                  <li><%=link_to section.section_name,product_section_customer_products_path(id:section.id)%></li>
+                  <%end%>               
+                </ul>
+              </li>  
+             <%end%>
+            </ul>
+            <%else%>
+               <ul>
+               <li><a href="/superadmin/companies">ADD</a>
+                 <ul class="dropdown">
+                    <li><a href="/superadmin/companies">Add Company</a></li>
+                    <li><a href="/superadmin/discounts">Add Discount</a></li>
+                    <li><a href="/superadmin/compositions">Add Composition</a></li>
+                    <li><a href="/superadmin/products">Add Product</a></li>
+                 </ul>
+
+               </li>
+               <li><a href="/superadmin/discounts">All Orders</a></li>
+               </ul>
+            <%end%>
+          
+          <%end%>
+          </nav>
+        </div>
+      </section>
+  <!-- header end -->
+     <ol class="breadcrumb">
+    <%= render_breadcrumbs :tag => :li%>
+  </ol>
+     <%= yield %>
+    <!-- footer start -->
+      <section id="footer-bar">
+        <div class="row">
+          <div class="span3">
+            <h4>Navigation</h4>
+            <ul class="nav">
+              <li><a href="./index.html">Homepage</a></li>  
+              <li><a href="./about.html">About Us</a></li>
+              <li><a href="./contact.html">Contac Us</a></li>
+              <li><a href="./cart.html">Your Cart</a></li>
+              <li><a href="./register.html">Login</a></li>              
+            </ul>         
+          </div>
+          <div class="span4">
+            <h4>My Account</h4>
+            <ul class="nav">
+              <li><a href="#">My Account</a></li>
+              <li><a href="#">Order History</a></li>
+              <li><a href="#">Wish List</a></li>
+              <li><a href="#">Newsletter</a></li>
+            </ul>
+          </div>
+          <div class="span5">
+            <p class="logo"><img src="themes/images/logo.png" class="site_logo" alt=""></p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. the  Lorem Ipsum has been the industry's standard dummy text ever since the you.</p>
+            <br/>
+            <span class="social_icons">
+              <a class="facebook" href="#">Facebook</a>
+              <a class="twitter" href="#">Twitter</a>
+              <a class="skype" href="#">Skype</a>
+              <a class="vimeo" href="#">Vimeo</a>
+            </span>
+          </div>          
+        </div>  
+      </section>
+      <section id="copyright">
+        <span>Copyright 2013 bootstrappage template  All right reserved.</span>
+      </section>
+    </div>
+    <script src="/assets/common.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $(document).ready(function() {
+          $('.flexslider').flexslider({
+            animation: "fade",
+            slideshowSpeed: 4000,
+            animationSpeed: 600,
+            controlNav: false,
+            directionNav: true,
+            controlsContainer: ".flex-container" // the container that holds the flexslider
+          });
+        });
+      });
+    </script>
+
+    
+    </body>

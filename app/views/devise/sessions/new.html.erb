@@ -1,0 +1,44 @@
+<section class="header_text sub">
+      <img class="pageBanner" src="/assets/pageBanner.png" alt="New products" >
+        <h4><span>Login</span></h4>
+      </section>      
+      <section class="main-content">        
+        <div class="row">
+          <div class="span5">         
+            <h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
+            <%= form_for(:user, url: session_path(User),:html => {:class => 'form-horizontal'}) do |f| %>
+              <div class="control-group">
+      <%= f.label :email,:class=>"control-label"  %>
+      <div class="controls">
+        <%= f.text_field :email,:placeholder => "Email"%>
+      </div>
+     </div>
+         <div class="control-group">
+      <%= f.label :password,:class=>"control-label"  %>
+      <div class="controls">
+        <%= f.password_field :password,:placeholder => "Password"%>
+      </div>
+     </div>
+      <% if devise_mapping.rememberable? %>
+          <div class="control-group">
+           <%= f.label :remember_me,:class=>"control-label" %>
+      
+      <div class="controls">
+       <%= f.check_box :remember_me %>
+      </div>
+     </div>
+     <%end%>
+        <div class="control-group">
+          <div class="controls">
+           <%= f.submit :"Login",:class => "btn btn-inverse large"%>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <a href="forgetpass.html" style="text-decoration:underline">Forgot password ?</a>
+          </div>
+        </div>
+      <%end%>      
+          </div>       
+        </div>
+      </section>  

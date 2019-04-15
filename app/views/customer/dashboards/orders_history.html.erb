@@ -1,0 +1,29 @@
+<section>
+    <h4><span>Your Orders</span></h4>
+</section>
+<section class="main-content"> 
+ <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Order Number</th>
+        <th>Date Placed</th>
+        <th>Item</th>
+        <th>Order Total</th>
+        <th>Order Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%@orders.each do |order|%>
+      <tr>
+        <td><%=link_to order.order_number,order_details_customer_dashboards_path(id:order.id)%></td>
+        <td><%=order.purchased_at%></td>
+        <td><%=order.order_items.size%></td>
+        <td>Rs.<%=order.final_payment%></td>
+        <td><%=order.order_status.name%></td>
+        <td><%=link_to "view Details",order_details_customer_dashboards_path(id:order.id)%></td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+</section>

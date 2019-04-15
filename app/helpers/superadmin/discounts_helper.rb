@@ -1,0 +1,2 @@
+module Superadmin::DiscountsHelper
+end

@@ -1,0 +1,30 @@
+<section class="main-content">        
+    <div class="row">
+      <div class="span7">         
+            <h4 class="title"><span class="text"><strong>Company</strong> Form</span></h4>
+            <%= form_for(:company, url: create_new_company_superadmin_companies_path) do |f| %>
+              <fieldset>
+            
+                <div class="control-group">
+                  <%= f.label :company_name,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.text_field :company_name,:placeholder => "Name"%>
+                    </div>
+                </div>
+                <div class="control-group">
+                  <%= f.label :company_description,:class=>"control-label"  %>
+                    <div class="controls">
+                      <%= f.text_field :company_description,:placeholder => "Description"%>
+                     </div>
+                </div>
+
+                <div class="control-group">
+                  <div class="controls">
+                    <%= f.submit :"Create Company",:class => "btn btn-inverse large"%>
+                  </div>
+                </div>    
+              </fieldset>
+            <%end%>        
+      </div>        
+    </div>
+</section>

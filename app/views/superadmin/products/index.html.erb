@@ -1,0 +1,24 @@
+<div class="nav">
+      <ul>
+        <li><a href="/superadmin/products/new">Add New Products</a></li>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%@products.each do |product|%>
+    <tr>
+        <td><%=product.product_name%></td>
+        <td><%=link_to "Edit",edit_superadmin_product_path(id:product.id)%></td>
+         <td><%=link_to "Delete",superadmin_product_path(id:product.id),method: :delete,data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+    <%end%>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_name: MyString
+  product_price: 1.5
+  product_unit: MyString
+  product_information: MyText
+  SectionType: one
+  Section: one
+  Company: one
+  ProductForm: one
+  Pack: one
+  Discount: one
+  Available: one
+  PrecRequire: one
+
+two:
+  product_name: MyString
+  product_price: 1.5
+  product_unit: MyString
+  product_information: MyText
+  SectionType: two
+  Section: two
+  Company: two
+  ProductForm: two
+  Pack: two
+  Discount: two
+  Available: two
+  PrecRequire: two

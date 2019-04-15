@@ -1,0 +1,2 @@
+module Superadmin::CompositionsHelper
+end

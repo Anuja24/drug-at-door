@@ -1,0 +1,277 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require bootstrap.min
+ *= require bootstrap-responsive.min
+ *= require font-awesome
+ *= require bootstrappage
+ *= require flexslider
+ *= require jquery-ui
+ *= require chosen
+ *= require base
+ *= require jquery.steps
+ *= require main
+ *= require_self
+ */
+
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+/*ul{
+        padding: 0;
+        list-style: none;
+        background: #f2f2f2;
+    }*/
+    ul li{
+        /*display: inline-block;*/
+        position: relative;
+        /*line-height: 21px;*/
+        text-align: left;
+    }
+    ul li a{
+        /*display: block;*/
+        /*padding: 8px 25px;*/
+        /*color: #333;*/
+        text-decoration: none;
+    }
+    ul li a:hover{
+        /*color: #fff;*/
+        /*background: #939393;*/
+    }
+    ul li ul.dropdown{
+        min-width: 100%; /* Set width of the dropdown */
+        background: #f2f2f2;
+        display: none;
+        position: absolute;
+        z-index: 999;
+        left: 0;
+        border-style: outset;
+    }
+    ul li:hover ul.dropdown{
+        display: block;	/* Display the dropdown */
+    }
+    ul li ul.dropdown li{
+        display: block;
+    }
+
+  ul.ui-autocomplete {
+    background-color: #ffffff;
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: solid 1px #999;
+    cursor: default;
+    li {
+     background-color: #FFF;
+     border-top: solid 1px #DDD;
+     margin: 0;
+     padding: 0;
+    a {
+      color: #000;
+      display: block;
+      padding: 3px;
+    }
+    a.ui-state-hover, a.ui-state-active {
+      background-color: #FFFCB2;
+    }
+  }
+} 
+
+#product_composition_ids {
+  width: 350px;
+}
+
+.filter-item {
+    font-size: 12px;
+    color: #212121;
+    display: flex;
+    line-height: 25px;
+    /*align-items: center;*/
+}
+
+.filter-item .filter-name {
+    margin: 0 10px 0 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    /*width: 20%;*/
+    display: inline-block;
+    white-space: nowrap;
+}
+
+
+
+.filter-options-title {
+    background: #eb4800;
+    color: #fff;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.block {
+     max-height: 150px;
+    overflow-y: auto;
+}
+
+#slider-range, #slider-range2,#slider-range3 ,#slider-range4,#slider-range1, #slider-range5,#slider-range6 ,#slider-range7,#slider-range8, #slider-range9{
+    margin-top:5px;
+}
+
+.thumbnail img {
+    height: 180px;
+    text-align: center;
+}
+.caption-price {
+    margin: 0 4px;
+}
+
+.caption-offer {
+    font-size: 20px;
+    text-align: left;
+    margin-left: 2px;
+    color: rgba(33,33,33,.87);
+}
+
+.caption-actual {
+    text-decoration: line-through;
+    white-space: nowrap;
+    color: rgba(117,117,117,.87);
+    margin-left: 2px;
+}
+
+.caption-mrp {
+    font-size: 12px;
+    font: bold;
+    color: #878686;
+}
+.caption-discount {
+    text-align: left;
+    color: #eb4800;
+    margin-left: 5px;
+    font-size: 12px;
+    display: inline;
+}
+.caption-name {
+    overflow: hidden;
+    height: 40px;
+    margin: 10px 4px 0;
+    font-size: 14px;
+    text-align: left;
+    color: #212121;
+    font-weight: bold;
+}
+
+
+
+.caption-availability {
+    height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    text-align: left;
+    color: #eb4800;
+    margin: 0 4px;
+    float: right;
+}
+
+
+
+.product-img{
+    text-align: center;
+}
+
+.product-info {
+    font-size: 24px;
+}
+
+.crs_t1 {
+    color: #444;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.lft {
+    float: left;
+}
+
+.crs_rgt_text {
+    margin-top: 15px;
+    width: 255px;
+}
+
+
+.crs_t2 {
+    cursor: default;
+    font-size: 11px;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.cw {
+    width: 100%;
+}
+
+.crp_p1 {
+    text-decoration: line-through;
+    display: inline-block;
+    float: none;
+    font-size: 12px;
+    padding-top: 17px;
+    text-align: center;
+}
+
+.crp_p2 {
+    color: #444;
+    font-size: 15px;
+    font-weight: 700;
+    height: 30px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.crp_p3 {
+    color: red;
+    font-size: 14px;
+    font-weight: 700;
+    height: 15px;
+    text-align: center;
+}
+
+.price_th{
+    text-align: center;
+}
+
+.address span{
+   word-wrap: break-word; 
+}
+
+.form-group label.next{
+    float: left;
+}
+
+.imageHolder {
+    position: relative;
+    width: 285px;
+    height: 175px;
+    border: 1px;
+}
+.imageHolder .caption {
+    position: absolute;
+    width: 283px;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    color: #ffffff;
+    background: #eb4800;
+    text-align:center;
+    font-weight:bold;
+    opacity:0.7;
+}

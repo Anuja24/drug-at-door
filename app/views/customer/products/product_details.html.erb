@@ -1,0 +1,74 @@
+<div>
+ 	<div class="row">	  
+			<div class="product-img span6">
+            <%= link_to image_tag(@product.photo.url), image_path(@product.photo.url), data: { lightbox: "example-set", title: "MyCaption" }%>
+	
+			</div>
+				<div class="span6">
+				<h3><%=@product.product_name%></h3>
+				<hr class="soft"/>
+				<%=form_for @order_item, :url => {:action=>'add_to_cart'},remote:true, method: :post,:html => {:class => "form-horizontal qtyFrm"} do |f| %>
+				  <div class="control-group">
+                  <label id="price" class="product-info control-label"><%=@product.discount_price%>
+				    </label>
+				    <span class="caption-mrp">Rs.</span><span id="product_price" class="caption-actual"><%=@product.product_price%></span><div  class="caption-discount"><%=@product.discount.discount_name%>% OFF</div>
+                     </div>
+                     <div class="control-group">
+                   <%= f.label :Select_quantity,:class=>"control-label"  %>
+                    <div class="qty controls">
+                     <%= f.number_field :quantity,:value => "1",:class => "span1", :placeholder => "Qty.", :min => "1"%>
+                    </div>
+                     </div>
+                      <%= f.hidden_field :product_id, value: @product.id %>
+                     <div class="control-group">
+                  <div class="controls">
+                    <%= f.submit :"Add to Cart",:class => "btn btn-large btn-primary pull-right"%>
+                  </div>
+                </div>
+				<%end%>
+			</div>
+			
+			<div class="span12">
+            <ul id="productDetail" class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
+              <li><a href="#profile" data-toggle="tab">Related Products</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="home">
+			  <h4>Product Information</h4>
+                <table class="table table-bordered">
+				<tbody>
+				<tr class="techSpecRow"><th colspan="2">Product Details</th></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Brand: </td><td class="techSpecTD2"><%=@product.company.company_name%></td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Product Form:</td><td class="techSpecTD2"><%=@product.product_form.form_name%></td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Product Pack:</td><td class="techSpecTD2"><%=@product.pack.pack_name%></td></tr>
+				</tbody>
+				</table>
+				
+				<h5>About Product</h5>
+				<p>
+					<%=@product.product_information%>
+				</p>
+              </div>
+		<div class="tab-pane fade" id="profile">
+		<div class="tab-content">
+	        <div class="tab-pane active" id="blockView">
+				<ul class="thumbnails">
+					<%@products.each do |product|%>
+			<li class="span3">
+			<%= render "product_row", product: product, order_item: @order_item %>
+			</li>
+		  <%end%>
+			   </ul>
+			    <hr class="soft"/>
+			</div>
+	    </div>
+	    <br class="clr">
+		</div>
+        </div>
+        </div>
+     </div>
+</div>
+
+
+ 

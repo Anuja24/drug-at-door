@@ -1,0 +1,24 @@
+<div class="nav">
+      <ul>
+        <li><a href="/superadmin/discounts/new">Add New Discount</a></li>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Discount Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%@discounts.each do |disount|%>
+      <tr>
+        <td><%=disount.discount_name %></td>
+        <td><%=link_to "Edit",edit_superadmin_discount_path(id:disount.id)%></td>
+        <td><%=link_to "Delete",superadmin_discount_path(id:disount.id),method: :delete,data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+    <%end%>
+    </tbody>
+  </table>
+</div>

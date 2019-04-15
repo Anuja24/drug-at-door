@@ -1,0 +1,110 @@
+<%if @orders.order_items.size == 0%>
+ <div>
+  <p class="text-center">
+    There are no items in your shopping cart.  Please <%= link_to "go back", root_path %> and add some items to your cart.
+  </p>
+  </div>
+<%else%> 
+<div>
+   <table class="table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th><div class="price_th">Price<div></th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+        </tr>
+              </thead>
+              <tbody>
+               <%@orders.order_items.each do |order_item|%>
+                <tr>
+                  <td> 
+                    <div class="crs_rgt_text lft"> 
+                        <div class="crs_t1 lft"> <%=order_item.product.product_name%> </div>
+                         <div class="crs_t2 lft"> <%=order_item.product.pack.pack_name + " of " + order_item.product.unit_qty + " " + order_item.product.unit.name + " " +  order_item.product.product_form.form_name%>
+                          
+                         </div>
+                    </div>
+                 </td>
+                  <td>
+                    <div class="crp_p1 lft cw">MRP <%=order_item.item_price%></div>
+                    <div class="crp_p2 lft cw">Rs. <%=order_item.unit_price%></div>
+                    <div class="crp_p3 lft cw"><%=order_item.product.discount.discount_name%> % OFF</div>
+                  </td>
+          <td>
+          <%= render 'carts/qty_row', product: order_item.product, order_item: order_item, show_total: true %>
+          </td>
+                  <td>Rs. <%=order_item.total_price%></td>
+                </tr>
+               
+       <%end%>
+
+        
+                <tr>
+                  <td colspan="3" style="text-align:right">Total Price: </td>
+                  <td>Rs. <%=@orders.subtotal%></td>
+                </tr>
+         <tr>
+                  <td colspan="3" style="text-align:right">Total Saving:  </td>
+                  <td>Rs. <%=@orders.total_discount%></td>
+                </tr>
+                 <tr>
+                  <td colspan="3" style="text-align:right">Shipping:  </td>
+                  <%if @orders.shipping_charges.nil?%>
+                   <td><%="Free Shipping"%></td>
+                   <%else%>
+                  <td>Rs. <%=@orders.shipping_charges %> </td>
+                  <%end%>
+                </tr>
+         <tr> 
+                <%if @orders.shipping_charges.nil?%>
+                  <td colspan="3" style="text-align:right"><strong>FINAL PAYMENT( <%= @orders.subtotal%> - <%=@orders.total_discount%>)
+                    
+                  </strong></td>
+                <%else%>
+                 <td colspan="3" style="text-align:right"><strong>FINAL PAYMENT( <%= @orders.subtotal%> - <%=@orders.total_discount%> + <%=@orders.shipping_charges %>) </strong></td>
+                 <%end%>
+                  <td class="label label-important" style="display:block"> <strong> Rs. <%=@orders.final_payment %></strong></td>
+                </tr>
+        </tbody>
+            </table>
+
+
+                <table class="table table-bordered">
+      <tbody>
+         <tr>
+                  <td> 
+        <form class="form-horizontal">
+        <div class="control-group">
+        <label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
+        <div class="controls">
+        <input type="text" class="input-medium" placeholder="CODE">
+        <button type="submit" class="btn"> ADD </button>
+        </div>
+        </div>
+        </form>
+        </td>
+                </tr>
+        
+      </tbody>
+      </table>
+      </div>
+   <%end%>  
+  <a href="/" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+  <a href="/check_outs/address" class="btn btn-large pull-right">CheckOut <i class="icon-arrow-right"></i></a>
+
+  <script type="text/javascript">
+  $('.quantity-right-plus').click(function() {
+  if (!isNaN($(this).prev().parent().children(".span1").val()))
+    $(this).prev().parent().children(".span1").val(+$(this).prev().parent().children(".span1").val() + 1);
+  else
+    $(this).prev().parent().children(".span1").val(0);
+});
+$('.quantity-left-minus').click(function() {
+
+  if ((!isNaN($(this).parent().children(".span1").val())) && ($(this).parent().children(".span1").val() > 0))
+    $(this).parent().children(".span1").val(+$(this).parent().children(".span1").val() - 1);
+  else
+    $(this).parent().next().children(".field").val(0);
+});
+</script>

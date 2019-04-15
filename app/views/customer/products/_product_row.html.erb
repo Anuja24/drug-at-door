@@ -1,0 +1,25 @@
+  <div class="thumbnail">
+	<a href="/customer/products/product_details?id=<%=product.id%>"><%=image_tag product.photo.url%></a>
+		<div class="caption">
+		    <div class="caption-name">
+		        <%=link_to product.product_name,product_details_customer_products_path(id:product.id)%>
+		    </div>
+		    <div class="caption-availability">In Stock</div>
+			    <div class="caption-price">
+				  	 <div class="caption-offer">Rs.<%=product.discount_price%></div>
+				  	 <span class="caption-mrp">Rs.</span>
+				  	 <span class="caption-actual"><%=product.product_price%></span>
+				  	 <div class="caption-discount"><%=product.discount.discount_name%>% OFF</div>
+				</div>
+				<%= form_for order_item,:url => {:action=>'add_to_cart'},remote:true, method: :post do |f| %>
+                  <div class="input-group">
+                   <div class="input-group-btn">
+                     <%= f.hidden_field :product_id, value: product.id %>
+                     <%= f.hidden_field :quantity, value: 1 %>
+                     <h4 style="text-align:center;"><%= f.submit "Add to Cart", class: "btn btn-primary" %></h4>
+                   </div>
+                 </div>
+      <% end %>
+				
+	   </div>
+ </div>

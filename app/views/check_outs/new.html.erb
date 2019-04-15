@@ -1,0 +1,65 @@
+<section class="header_text sub">
+    <h4><span>Address</span></h4>
+      </section>
+  <section class="main-content">        
+        <div class="row">
+          <div class="span7">         
+            <h4 class="title"><span class="text"><strong>New Address</strong></span></h4>
+            <%= form_for(:address, url: create_address_check_outs_path, :html => {:class => 'form-stacked'}) do |f| %>
+              <fieldset>
+                <div class="control-group">
+                <%= f.label :full_address,:class=>"control-label"  %>
+                 <div class="controls">
+        <%= f.text_area :full_address,:placeholder => "Full Address"%>
+      </div>
+     </div>
+      <div class="control-group">
+      <%= f.label :land_mark,:class=>"control-label"  %>
+      <div class="controls">
+        <%= f.text_field :land_mark,:placeholder => "Land Mark"%>
+      </div>
+     </div>
+     <div class="control-group">
+      <%= f.label :pincode,:class=>"control-label"  %>
+      <div class="controls">
+        <%= f.text_field :pincode,:placeholder => "Pincode"%>
+      </div>
+     </div>
+    
+      <div class="control-group">
+      <%= f.label :mobile_no,:class=>"control-label"  %>
+      <div class="controls">
+        <%= f.text_field :mobile_no,:placeholder => "Mobile Number"%>
+      </div>
+      </div> 
+
+       <div class="control-group">
+      <%= f.label :city,:class=>"control-label"  %>
+      <div class="controls">
+        <%= f.text_field :city,:placeholder => "City"%>
+      </div>
+      </div> 
+
+       <div class="control-group">
+      <%= f.label :state,:class=>"control-label"  %>
+      <div class="controls">
+        <%= f.text_field :state,:placeholder => "State"%>
+      </div>
+      </div> 
+      <%=f.hidden_field :user_id,:value => @user.id %>
+                <hr>
+
+                 <div class="control-group">
+      <div class="controls">
+      <%= f.submit :"Save",:class => "btn btn-inverse large"%>
+      </div>
+    </div>    
+ 
+               
+              </fieldset>
+            <%end%>        
+          </div>        
+        </div>
+      </section>
+
+

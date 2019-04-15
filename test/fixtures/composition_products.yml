@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  composition: one
+  product: one
+
+two:
+  composition: two
+  product: two

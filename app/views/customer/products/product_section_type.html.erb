@@ -1,0 +1,121 @@
+<section class="main-content">
+<h4 class="title">
+	<span class="pull-left"><span class="text">Filter By</span></span>
+</h4>
+	<div class="row">
+        <div class="span3 col">
+		  <%= form_for :product_search, url:{action:'product_search'},method: :get,remote:true,html:{id: "product_form"} do |f| %>
+                <%= f.hidden_field :section_type_id ,:value => @section_type.id %>
+                    <div class="block">	
+						<h4 class="title">
+						  <span class="pull-left"><span class="text">Sub Categories</span></span>
+						</h4>
+					    <% @section.each do |section|%>
+					     <label class="filter-item "> 
+				            <%= check_box_tag :"section_id[]",section.id,false,{onchange:"$('#product_form').submit();"}%>
+                            <span class="filter-name"><%=section.section_name%></span>
+                         </label>
+                        <%end%>
+                    </div>
+					
+					<div class="block">	
+						<h4 class="title">
+								<span class="pull-left"><span class="text">Brand</span></span>
+						</h4>
+					    <% @products.each do |product|%>
+					     <label class="filter-item "> 
+                            <%= check_box_tag :"company_id[]",product.company.id,false,{onchange:"$('#product_form').submit();"}%>
+                            <span class="filter-name"><%=product.company.company_name%></span>
+                           </label>
+                        <%end%>
+                   </div>
+
+					<div class="block">
+						<h4 class="title">
+								<span class="pull-left"><span class="text">Discount</span></span>
+						</h4>
+						<% discount = ["20% and Above","10% and above","less than 10%"]%>
+					    <%discount.each do |dis|%>
+                            <label class="filter-item ">
+                                <%= check_box_tag :"discount_id[]",dis,false,{onchange:"$('#product_form').submit();"}%>
+                                <span class="filter-name"><%=dis%></span>
+                            </label>
+					     <%end%>
+                    </div>
+
+					<div class="block">
+						<h4 class="title">
+						  <span class="pull-left"><span class="text">Price</span></span>
+						</h4>
+						 <div id="slider-range"></div>
+                           <p>
+                             <input type="hidden" name="maxrange" id="maxrange"/>
+                             <input type="hidden" name="minrange" id="minrange"/>
+                             <label for="amount">Price range:</label>
+                              <%=f.text_field :range,id:"amount",disabled:true,style:"border:0; color:#f6931f; font-weight:bold;"%>
+                           </p>
+                     </div>
+                    
+					</div>						
+		    <div class="span9">
+	          <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>	
+	          <hr class="soft"/>
+		      <div class="control-group">
+		      <label class="control-label alignL">Sort By</label>
+		         <%= f.select :sort_id,['Relevance','Price : Low to High','Price : High to Low'],{onchange:"$('#product_form').submit();",id:"sort",class:"form-control"}%>
+			     
+		     </div>
+	        <%end%>
+	       <br class="clr"/>
+              <div class="product-main">
+                 <div class="tab-content">
+                    <div class="tab-pane  active" id="blockView">
+		             <ul class="thumbnails">
+		             <%@products.each do |product|%>
+			         <li class="span3">
+			          <%= render "product_row", product: product, order_item: @order_item %>
+			         </li>
+		             <%end%>
+		             </ul>
+	                 <hr class="soft"/>
+	                </div>
+                   </div>
+              </div>
+            
+            <div class="pagination">
+			  <ul>
+			    <li><a href="#">&lsaquo;</a></li>
+			    <li><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">...</a></li>
+			    <li><a href="#">&rsaquo;</a></li>
+			 </ul>
+			</div>
+			<br class="clr"/>
+        </div>
+				
+    </div>
+</section>		
+  
+<script type="text/javascript">
+	$(function() {
+        $( "#slider-range" ).slider({
+            range: true,
+            min: 0,
+            max: <%=Product.pluck(:discount_price).max.to_i%>,
+            values: [ <%=@products.pluck(:discount_price).min.to_i%>, <%=@products.pluck(:discount_price).max.to_i%> ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
+                $("#minrange").val(ui.values[ 0 ]);
+                $("#maxrange").val(ui.values[ 1 ]);
+            },
+            change: function( event, ui ) {
+                $('#product_form').submit();
+            }
+        });
+        $( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
+    });
+</script>

@@ -1,0 +1,192 @@
+<section class="main-content">        
+    <div class="row">
+              <div class="span7">  
+            <h4 class="title"><span class="text"><strong>Product</strong> Form</span></h4></div>
+         <%=form_for @product, :url => {:action=>'update',:id => @product.id }, method: :patch do |f|%>
+              <fieldset>
+                <div class="span7"> 
+               <div class="control-group">
+                  <%= f.label :section_type,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.collection_select :section_type_id, SectionType.order(:section_type_name), :id, :section_type_name,prompt:true%>
+                    </div>
+                </div>
+                <div class="control-group">
+                  <%= f.label :section,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.grouped_collection_select :section_id, SectionType.order(:section_type_name), :sections, :section_type_name, :id, :section_name,include_blank: true,prompt:true%>
+                    </div>
+                </div>
+
+               
+                <div class="control-group">
+                  <%= f.label :company_name,:class=>"control-label"  %>
+                    <div class="controls">
+                    <%= f.collection_select :company_id, Company.order(:company_name), :id, :company_name,{prompt:"Select Company"}%>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                  <%= f.label :product_name,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.text_field :product_name,:placeholder => "Name"%>
+                    </div>
+                </div>
+                 
+                   <div class="control-group">
+                  <%= f.label :product_image,:class=>"control-label"  %>
+                    <div class="controls">
+                      <%= f.file_field :photo %>
+                    </div>
+                </div>
+
+
+                  <div class="composition control-group">
+                  <%= f.label :Composition,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.collection_select :composition_ids, Composition.order(:Composition_name), :id, :Composition_name,{ include_blank: true, selected: @product.compositions.map(&:id)},{multiple:true}%>
+                    </div>
+                </div>
+
+                 <div class="control-group">
+                  <%= f.label :product_information,:class=>"control-label"  %>
+                    <div class="controls">
+                      <%= f.text_area :product_information,:placeholder => "Price"%>
+                     </div>
+                </div>
+                 
+                      <div class="control-group">
+                  <%= f.label :product_form_name,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.collection_select :product_form_id, ProductForm.order(:form_name), :id, :form_name,{prompt:"Select Product Form"}%>
+                    </div>
+                </div>
+                
+                </div>
+
+                 <div class="span5"> 
+                    <div class="control-group">
+                  <%= f.label :product_price,:class=>"control-label"  %>
+                    <div class="controls">
+                      <%= f.text_field :product_price,:placeholder => "Price"%>
+                     </div>
+                </div>
+                  
+                       <div class="control-group">
+                  <%= f.label :Discount,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.select :discount_id,Discount.all.map { |s| [s.discount_name, s.id]},{prompt:"Select Discount"}%>
+                    </div>
+                </div>
+                  
+                    <div class="control-group">
+                  <%= f.label :discount_price,:class=>"control-label"  %>
+                    <div class="controls">
+                      <%= f.text_field :discount_price,:placeholder => "Discount Price"%>
+                     </div>
+                </div>
+
+
+                   <div class="control-group">
+                  <%= f.label :Unit,:class=>"control-label"  %>
+                  <div class="controls">
+                     <%= f.text_field :unit_qty%><%= f.select :unit_id,Unit.all.map { |s| [s.name, s.id]},{prompt:"Select Unit"}%>
+                    </div>
+                   
+                </div>
+
+               
+                
+                <div class="control-group">
+                  <%= f.label :Pack,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.select :pack_id,Pack.all.map { |s| [s.pack_name, s.id]},{prompt:"Select Pack"}%>
+                    </div>
+                </div>
+
+                     <div class="control-group">
+                  <%= f.label :Prescription_Require,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.select :prec_require_id,PrecRequire.all.map { |s| [s.name, s.id]},{prompt:"Select"}%>
+                    </div>
+                </div>
+
+               
+
+                     <div class="control-group">
+                  <%= f.label :available,:class=>"control-label"  %>
+                    <div class="controls">
+                     <%= f.select :available_id,Available.all.map { |s| [s.available_name, s.id]},{prompt:"Select Available"}%>
+                    </div>
+                </div>
+                 </div> 
+                 <div class="span7">  
+                <div class="control-group">
+                  <div class="controls">
+                    <%= f.submit :"Save",:class => "btn btn-inverse large"%>
+                  </div>
+                </div> 
+                 </div>
+              </fieldset>
+            <%end%>        
+      </div>        
+</section>
+
+
+<script type="text/javascript">
+   $( "#product_product_form_name" ).autocomplete({
+      source: $('#product_product_form_name').data('autocomplete-source')
+    });
+
+   $( "#product_company_name" ).autocomplete({
+      source: $('#product_company_name').data('autocomplete-source')
+    });
+
+jQuery(function() {
+  var states;
+  // $('#product_section_id').parent().hide();
+  states = $('#product_section_id').html();
+  console.log(states);
+  return $('#product_section_type_id').change(function() {
+    var country, escaped_country, options;
+    country = $('#product_section_type_id :selected').text();
+    escaped_country = country.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
+    options = $(states).filter("optgroup[label=" + escaped_country + "]").html();
+    console.log(options);
+    if (options) {
+      $('#product_section_id').html(options);
+      return $('#product_section_id').parent().show();
+    } else {
+      $('#product_section_id').empty();
+      return $('#product_section_id').parent().hide();
+    }
+  });
+});
+
+$('#product_composition_ids').chosen();
+
+$('#product_company_id').chosen();
+
+$('#product_product_form_id').chosen();
+$(function () {
+        $("#product_section_type_id").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            
+            if (selectedText == "Medicines") {
+                $(".composition").show();
+              } else {
+                $(".composition").hide();
+            }
+        });
+    });
+$(function () {
+        $("#product_discount_id").change(function () {
+            var discount = $(this).find("option:selected").text();
+            var original_price = document.getElementById("product_product_price").value;
+            var discount_price = (discount/100) * original_price;
+            
+            document.getElementById("product_discount_price").value = original_price -discount_price
+        });
+    });
+</script>

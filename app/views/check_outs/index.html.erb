@@ -1,0 +1,56 @@
+
+   
+   <h3>Payment</h3>
+    <fieldset>
+        <legend>Payment</legend>
+        <div class="row">
+        
+          <div class="span5">
+              <h4 class="title"><span class="text"><strong>Final</strong>Payment</span></h4>
+               <table>
+                        <tbody>
+                            <tr>
+                  <td colspan="3" style="text-align:right">Total Price: </td>
+                  <td>Rs. <%=@orders.subtotal%></td>
+                </tr>
+         <tr>
+                  <td colspan="3" style="text-align:right">Total Saving:  </td>
+                  <td>Rs. <%=@orders.total_discount%></td>
+                </tr>
+                 <tr>
+                  <td colspan="3" style="text-align:right">Shipping:  </td>
+                  <%if @orders.shipping_charges.nil?%>
+                   <td><%="Free Shipping"%></td>
+                   <%else%>
+                  <td>Rs. <%=@orders.shipping_charges %> </td>
+                  <%end%>
+                </tr>
+         <tr> 
+                <%if @orders.shipping_charges.nil?%>
+                  <td colspan="3" style="text-align:right"><strong>FINAL PAYMENT( <%= @orders.subtotal%> - <%=@orders.total_discount%>)
+                    
+                  </strong></td>
+                <%else%>
+                 <td colspan="3" style="text-align:right"><strong>FINAL PAYMENT( <%= @orders.subtotal%> - <%=@orders.total_discount%> + <%=@orders.shipping_charges %>) </strong></td>
+                 <%end%>
+                  <td class="label label-important" style="display:block"> <strong> Rs. <%=@orders.final_payment %></strong></td>
+                </tr>
+        </tbody>
+            </table>    
+
+            <% payment_form_for_payu 'gtKFFx', 'eCwWELxi',
+                :txnid => rand(36**10).to_s(36),
+                :amount => 1234,
+                :productinfo => 'Book',
+                :firstname => 'abc',
+                :email => 'abc@example.com',
+                :phone => '1234567890',
+                :surl => 'http://localhost:3000/payu_callback',
+                :furl => 'http://localhost:3000/payu_callback',
+                :html => { :id => 'payment-form'} %>
+          </div>
+         </div>  
+        
+    </fieldset>
+
+
